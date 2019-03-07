@@ -169,7 +169,7 @@ class FABGroup extends React.Component<Props, State> {
                 useNativeDriver: true,
               })
             )
-            .reverse()
+            // .reverse()
         ),
       ]).start();
     } else {
@@ -248,6 +248,20 @@ class FABGroup extends React.Component<Props, State> {
           />
         </TouchableWithoutFeedback>
         <SafeAreaView pointerEvents="box-none" style={styles.safeArea}>
+        <FAB
+            onPress={() => {
+              onPress && onPress();
+              this._toggle();
+            }}
+            icon={icon}
+            color={this.props.color}
+            accessibilityLabel={accessibilityLabel}
+            accessibilityTraits="button"
+            accessibilityComponentType="button"
+            accessibilityRole="button"
+            style={[styles.fab, fabStyle]}
+            visible={visible}
+          />
           <View pointerEvents={open ? 'box-none' : 'none'}>
             {actions.map((it, i) => (
               <View
@@ -308,20 +322,7 @@ class FABGroup extends React.Component<Props, State> {
               </View>
             ))}
           </View>
-          <FAB
-            onPress={() => {
-              onPress && onPress();
-              this._toggle();
-            }}
-            icon={icon}
-            color={this.props.color}
-            accessibilityLabel={accessibilityLabel}
-            accessibilityTraits="button"
-            accessibilityComponentType="button"
-            accessibilityRole="button"
-            style={[styles.fab, fabStyle]}
-            visible={visible}
-          />
+       
         </SafeAreaView>
       </View>
     );
@@ -334,11 +335,12 @@ export default withTheme(FABGroup);
 
 const styles = StyleSheet.create({
   safeArea: {
-    alignItems: 'flex-end',
+    alignItems: 'flex-start',
+    
   },
   container: {
     ...StyleSheet.absoluteFillObject,
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
   },
   fab: {
     marginHorizontal: 16,
@@ -357,7 +359,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   item: {
-    marginHorizontal: 24,
+    marginHorizontal: 10,
     marginBottom: 16,
     flexDirection: 'row',
     justifyContent: 'flex-end',
